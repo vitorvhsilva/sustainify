@@ -12,7 +12,7 @@ export default function Cabecalho() {
   };
 
   return (
-    <header className="navbar font-poppins">
+    <header className="navbar">
       <div className="navbar-container">
         <Link href="/" className="navbar-brand">
           <Image

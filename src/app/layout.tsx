@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body>
+      <body className="font-montserrat">
         <Cabecalho/>
         {children}
       </body>
