@@ -1,6 +1,6 @@
 export default function Beneficio({titulo, texto, children}: {titulo:string, texto: string, children: JSX.Element}) {
   return (
-    <div className="border-corPreta border border-solid rounded-xl h-fit hover:scale-110 transition duration-500">
+    <div className="border-cor5 border border-solid rounded-xl h-fit hover:scale-110 transition duration-500">
       <div className="h-[50%] w-full bg-cor1 rounded-t-lg flex justify-center items-center py-20">
         {children}
       </div>
