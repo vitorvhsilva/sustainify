@@ -10,7 +10,7 @@ export default function Cadastro() {
       <div className="xl:w-[40%] lg:w-[60%] md:w-[80%] w-[95%] h-fit bg-cor4 rounded-xl lg:mr-10 mx-auto">
         <Image className="w-48 mx-auto block" src={'/logobranca.png'} alt="Logo da Sustainify" width={1000} height={1000}/>
         <h1 className="text-center text-corBranca text-3xl mb-2">Cadastro</h1>
-        <h2 className="text-2xl text-corBranca ml-5">Já tem uma conta? <Link href={"/cadastro"} className="text-cor5 underline">Faça Login</Link></h2>
+        <h2 className="text-2xl text-corBranca ml-5">Já tem uma conta? <Link href={"/login"} className="text-cor5 underline">Faça Login</Link></h2>
         <form action="" className="p-5">
           <div className="w-full h-fit my-5">
             <label htmlFor="nome" className="block text-2xl text-corBranca font-semibold">Nome</label>
