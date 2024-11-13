@@ -1,7 +1,7 @@
-import Beneficios from "@/components/Home/Beneficios/Beneficios";
+import Integrantes from "@/components/Integrantes/Integrantes";
 
 export default function Teste() {
   return (
-    <Beneficios/>
+    <Integrantes/>
   )
 }
