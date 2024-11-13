@@ -1,7 +1,7 @@
-import Integrantes from "@/components/Integrantes/Integrantes";
+import Login from "@/components/Login/Login";
 
 export default function Teste() {
   return (
-    <Integrantes/>
+    <Login/>
   )
 }

@@ -20,7 +20,7 @@ export default function Beneficios() {
           <MdEnergySavingsLeaf className="w-40 h-40 text-corBranca"/>
         </Beneficio>
 
-        <Beneficio titulo="Sistema de Recompensa entre os Moradores" texto="Forneça prêmios a sua escolha para os moradores de acordo com os dados fornecidos por nós, pelo nosso sistema de ranking, assim gerando gameficação no seu condomínio. Dessa forma, você recompensa os moradores e fornece cada vez mais um meio ambiente sustentável para as próximas gerações">
+        <Beneficio titulo="Sistema de Recompensa entre os Moradores" texto="Forneça prmios a sua escolha para os moradores de acordo com os dados fornecidos por nós, pelo nosso sistema de ranking, assim gerando gameficação no seu condomínio. Dessa forma, você recompensa os moradores e fornece cada vez mais um meio ambiente sustentável para as próximas gerações">
           <FaGamepad className="w-40 h-40 text-corBranca"/>
         </Beneficio>
       </div>    
