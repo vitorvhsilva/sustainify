@@ -21,8 +21,8 @@ export default function RankingComunidade() {
   return (
     <div className="lg:w-[49%] w-[90%] h-fit pt-2">
       <h2 className="text-2xl">veja o ranking da comunidade</h2>
-      <div className="w-full h-fit flex justify-between">
-        <div className="w-[55%] h-fit">
+      <div className="w-full h-fit flex justify-between md:flex-row flex-col">
+        <div className="md:w-[55%] w-full h-fit">
           <h3 className="mt-2">ranking</h3>
           <table className="w-full h-fit border border-solid border-corPreta">
             <thead>
@@ -40,7 +40,7 @@ export default function RankingComunidade() {
             </tbody>
           </table>
         </div>
-        <div className="w-[40%] h-fit">
+        <div className="md:w-[40%] w-full h-fit">
           <h3 className="mt-2">prêmios</h3>
           <table className="w-full h-fit border border-solid border-corPreta">
             <thead>
