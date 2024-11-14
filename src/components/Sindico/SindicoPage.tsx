@@ -1,7 +1,7 @@
 "use client"
 
 import GraficoLinha from "../Graficos/GraficoLinha";
-import InformacoesPessoaiseConsumoComunidade from "../Morador/InformacoesPessoaiseConsumoComunidade";
+import InformacoesPessoaisSindico from "./InformacoesPessoaisSindico";
 import RankingComunidadeSindico from "./RankingComunidadeSindico";
 import SolicitacoesUsuarios from "./SolicitacoesUsuario";
 
@@ -30,7 +30,7 @@ export default function SindicoPage() {
           <div className="w-[2px] h-[55rem] mx-auto rounded-xl bg-corPreta/50"></div>
         </div>
         <div className="w-full h-[2px] mx-auto rounded-xl bg-corPreta/50 lg:hidden block my-5"></div>
-        <InformacoesPessoaiseConsumoComunidade />
+        <InformacoesPessoaisSindico />
       </div>
     </main>
   )
