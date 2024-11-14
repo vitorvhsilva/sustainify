@@ -1,7 +1,7 @@
-import MoradorPage from "@/components/Morador/MoradorPage";
+import SindicoPage from "@/components/Sindico/SindicoPage";
 
 export default function Teste() {
   return (
-    <MoradorPage/>
+    <SindicoPage/>
   )
 }
