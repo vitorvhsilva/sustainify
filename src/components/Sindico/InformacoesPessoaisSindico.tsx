@@ -1,11 +1,11 @@
 export default function InformacoesPessoaisSindico() {
 
-  const data = [
-    { mes: 'Janeiro', emissao: 30 },
-    { mes: 'Fevereiro', emissao: 45 },
-    { mes: 'Março', emissao: 20 },
-    { mes: 'Abril', emissao: 25 },
-  ];
+  // const data = [
+  //   { mes: 'Janeiro', emissao: 30 },
+  //   { mes: 'Fevereiro', emissao: 45 },
+  //   { mes: 'Março', emissao: 20 },
+  //   { mes: 'Abril', emissao: 25 },
+  // ];
 
   return (
     <div className="lg:w-[69%] w-[90%] h-fit pt-2">

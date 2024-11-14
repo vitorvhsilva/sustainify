@@ -10,7 +10,7 @@ export default function SolicitacaoUsuario() {
         <p className="text-xl">Número Residência: 45A</p>
       </div>
       <div className="w-[20%] h-fit flex justify-center flex-col items-center">
-        <FaCheck className="text-corPreta w-10 h-10 hover:text-cor1 duration-500 transition cursor-pointer"/>
+        <FaCheck className="text-corPreta w-10 h-10 hover:text-green-500 duration-500 transition cursor-pointer"/>
         <IoMdClose className="text-corPreta w-16 h-16 hover:text-red-600 duration-500 transition cursor-pointer"/>
       </div>
     </div>
