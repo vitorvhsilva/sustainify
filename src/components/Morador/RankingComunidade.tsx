@@ -19,7 +19,7 @@ export default function RankingComunidade() {
   const listaPorEmissao = [...data].sort((a, b) => a.emissao - b.emissao);
 
   return (
-    <div className="w-[49%] h-fit pt-2">
+    <div className="lg:w-[49%] w-[90%] h-fit pt-2">
       <h2 className="text-2xl">veja o ranking da comunidade</h2>
       <div className="w-full h-fit flex justify-between">
         <div className="w-[55%] h-fit">
