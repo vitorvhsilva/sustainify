@@ -2,6 +2,8 @@
 
 import GraficoLinha from "../Graficos/GraficoLinha";
 import CalculadoraCarbono from "./CalculadoraCarbono";
+import DicasSustentaveis from "./DicasSustentaveis";
+import InformacoesPessoais from "./InformacoesPessoais";
 import RankingComunidade from "./RankingComunidade";
 
 export default function MoradorPage() {
@@ -19,13 +21,22 @@ export default function MoradorPage() {
       <h2 className="text-2xl">Veja sua emissão de carbono ao longo do ano:</h2>
       <GraficoLinha data={data}/>
       <div className="w-full h-[2px] mx-auto rounded-xl bg-corPreta/50"></div>
-      <div className="w-full h-fit flex mt-1 flex-col lg:flex-row items-center">
+      <div className="w-full h-fit flex mt-1 flex-col lg:flex-row lg:items-start items-center">
         <CalculadoraCarbono />
         <div className="w-[2%] h-full lg:block hidden">
-          <div className="w-[2px] h-40 mx-auto rounded-xl bg-corPreta/50"></div>
+          <div className="w-[2px] h-80 mx-auto rounded-xl bg-corPreta/50"></div>
         </div>
         <div className="w-full h-[2px] mx-auto rounded-xl bg-corPreta/50 lg:hidden block my-5"></div>
         <RankingComunidade />
+      </div>
+      <div className="w-full h-[2px] mx-auto my-1 rounded-xl bg-corPreta/50"></div>
+      <div className="w-full h-fit flex mt-1 flex-col lg:flex-row lg:items-start items-center">
+        <DicasSustentaveis />
+        <div className="w-[2%] h-full lg:block hidden">
+          <div className="w-[2px] h-80 mx-auto rounded-xl bg-corPreta/50"></div>
+        </div>
+        <div className="w-full h-[2px] mx-auto rounded-xl bg-corPreta/50 lg:hidden block my-5"></div>
+        <InformacoesPessoais />
       </div>
     </main>
   )
