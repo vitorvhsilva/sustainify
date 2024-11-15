@@ -82,10 +82,14 @@ export default function Cadastro() {
           :
           (
             <>
-              <h2 className="text-corBranca font-semibold text-2xl mb-2">Insira o CEP da Comunidade</h2> 
+              <h2 className="text-corBranca font-semibold text-2xl mb-2">Insira as informações do seu endereço</h2> 
               <div className="w-full h-fit my-5">
-                <label htmlFor="cep" className="block text-2xl text-corBranca font-semibold">CEP</label>
+                <label htmlFor="cep" className="block text-2xl text-corBranca font-semibold">CEP da Comunidade</label>
                 <input className="text-2xl px-2 py-2 w-full rounded-xl" type="text" name="cep" id="cep" />
+              </div>
+              <div className="w-full h-fit my-5">
+                <label htmlFor="num" className="block text-2xl text-corBranca font-semibold">Número da sua Residência</label>
+                <input className="text-2xl px-2 py-2 w-full rounded-xl" type="text" name="num" id="num" />
               </div>
             </>
           )
