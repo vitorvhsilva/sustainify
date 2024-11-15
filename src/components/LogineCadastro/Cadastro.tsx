@@ -2,8 +2,19 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { useState } from "react"
 
 export default function Cadastro() {
+
+  const [sindicoSelecionado, setSindicoSelecionado] = useState(false)
+
+  const clicarRadioMorador = () => {
+    setSindicoSelecionado(false)
+  }
+
+  const clicarRadioSindico = () => {
+    setSindicoSelecionado(true)
+  }
 
   return (
     <section className="w-full h-fit py-10 bg-cover bg-[url('/login/fundologin.jpg')] flex items-center lg:justify-end">
@@ -40,14 +51,45 @@ export default function Cadastro() {
           <h2 className="text-corBranca font-semibold text-2xl mb-2">Tipo de Conta</h2>
           <div className="w-full flex items-center h-fit my-5">
             <div className="w-full h-fit flex items-center md:gap-4 gap-1 ">
-              <input className="w-8 h-8" type="radio" id="morador" name="tipo" value="morador"/>
+              <input className="w-8 h-8" type="radio" id="morador" name="tipo" value="morador" onClick={clicarRadioMorador}/>
               <label htmlFor="morador" className="text-2xl text-corBranca">Morador</label>
             </div>
             <div className="w-full h-fit flex items-center md:gap-4 gap-1 ">
-              <input className="w-8 h-8" type="radio" id="sindico" name="tipo" value="sindico"/>
+              <input className="w-8 h-8" type="radio" id="sindico" name="tipo" value="sindico" onClick={clicarRadioSindico}/>
               <label htmlFor="sindico" className="text-2xl text-corBranca">Síndico</label>
             </div>
-          </div>
+          </div> 
+          { sindicoSelecionado ?
+          (
+            <>
+              <h2 className="text-corBranca font-semibold text-2xl mb-2">Informações da Comunidade</h2> 
+              <div className="w-full h-fit my-5">
+                <label htmlFor="cep" className="block text-2xl text-corBranca font-semibold">CEP</label>
+                <input className="text-2xl px-2 py-2 w-full rounded-xl" type="text" name="cep" id="cep" />
+              </div>
+
+              <div className="w-full h-fit my-5">
+                <label htmlFor="rua" className="block text-2xl text-corBranca font-semibold">Rua</label>
+                <input className="text-2xl px-2 py-2 w-full rounded-xl" type="text" name="rua" id="rua" />
+              </div>
+
+              <div className="w-full h-fit my-5">
+                <label htmlFor="num" className="block text-2xl text-corBranca font-semibold">Número</label>
+                <input className="text-2xl px-2 py-2 w-full rounded-xl" type="text" name="num" id="num" />
+              </div>
+            </>
+          ) 
+          :
+          (
+            <>
+              <h2 className="text-corBranca font-semibold text-2xl mb-2">Insira o CEP da Comunidade</h2> 
+              <div className="w-full h-fit my-5">
+                <label htmlFor="cep" className="block text-2xl text-corBranca font-semibold">CEP</label>
+                <input className="text-2xl px-2 py-2 w-full rounded-xl" type="text" name="cep" id="cep" />
+              </div>
+            </>
+          )
+          }
           <input type="submit" className="bg-cor1 hover:bg-cor2 duration-500 transition cursor-pointer px-10 py-2 text-corBranca text-2xl rounded-xl block mx-auto xl:mt-14 mt-6"/>
         </form>
       </div>
