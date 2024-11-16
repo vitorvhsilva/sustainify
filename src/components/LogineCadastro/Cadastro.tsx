@@ -84,7 +84,7 @@ export default function Cadastro() {
         return
       }
 
-      const responseIdSindico = await fetch(`http://localhost:8080/sindicos/${requisicao.cpfSindico}`);
+      const responseIdSindico = await fetch(`http://localhost:8080/sindicos/id/${requisicao.cpfSindico}`);
       const idSindico = await responseIdSindico.json();
 
       localStorage.setItem("idSindico", idSindico)
