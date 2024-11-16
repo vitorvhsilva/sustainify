@@ -36,7 +36,8 @@ export default function CalculadoraCarbono () {
 
   return (
     <div className="lg:w-[49%] w-[90%] h-fit pt-2">
-      <h2 className="text-2xl">insira o valor da sua conta de energia</h2>
+      <h2 className="text-2xl">faça sua emissão do mês</h2>
+      <h3 className="text-xl">insira o valor da conta de energia</h3>
       <form action="" onSubmit={handleSubmit}>
         <input type="text" name="conta" id="conta" className=" mt-5 border border-solid border-corPreta rounded-xl text-xl px-2 py-2" onChange={(e) => setConta(parseFloat(e.target.value))}/>
         <input type="submit" className="mt-2 block bg-cor4 text-corBranca text-2xl px-10 py-2 rounded-xl cursor-pointer"/>
