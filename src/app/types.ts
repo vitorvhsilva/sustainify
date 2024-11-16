@@ -28,3 +28,18 @@ export type TipoSindico = {
   senhaSindico: string;
   telefoneSindico: string;
 }
+
+export type TipoComunidade = {
+  ruaComunidade: string,
+  numComunidade: string,
+  cepComunidade: string,
+}
+
+export type TipoSolicitacao = {
+  idMorador: number
+  idSindico: number
+  nomeMorador: string
+  cpfMorador: string
+  cepSolicitacao: string
+  numResidenciaSolicitacao: string
+}

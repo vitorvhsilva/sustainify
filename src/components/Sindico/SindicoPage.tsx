@@ -1,6 +1,6 @@
 "use client"
 
-import { TipoSindico } from "@/app/types";
+import { TipoComunidade, TipoSindico } from "@/app/types";
 import GraficoLinha from "../Graficos/GraficoLinha";
 import InformacoesPessoaisSindico from "./InformacoesPessoaisSindico";
 import RankingComunidadeSindico from "./RankingComunidadeSindico";
@@ -28,12 +28,22 @@ export default function SindicoPage() {
     telefoneSindico: ""
   })
 
+  const [comunidade, setComunidade] = useState<TipoComunidade>({
+    ruaComunidade: "",
+    numComunidade: "",
+    cepComunidade: ""
+  })
+
   const pegarSindico = async () => {
     const idSindico = localStorage.getItem("idSindico")
 
     const sindicoResponse = await fetch(`http://localhost:8080/sindicos/${idSindico}`);
     const sindico: TipoSindico = await sindicoResponse.json();
     setSindico(sindico)
+
+    const comunidadeResponse = await fetch(`http://localhost:8080/comunidades/${idSindico}`);
+    const comunidade: TipoComunidade = await comunidadeResponse.json();
+    setComunidade(comunidade)
   }
 
   return (
@@ -52,7 +62,7 @@ export default function SindicoPage() {
           <div className="w-[2px] h-[55rem] mx-auto rounded-xl bg-corPreta/50"></div>
         </div>
         <div className="w-full h-[2px] mx-auto rounded-xl bg-corPreta/50 lg:hidden block my-5"></div>
-        <InformacoesPessoaisSindico nome={sindico.nomeSindico} cpf={sindico.cpfSindico} email={sindico.emailSindico} telefone={sindico.telefoneSindico}/>
+        <InformacoesPessoaisSindico sindico={sindico} comunidade={comunidade}/>
       </div>
     </main>
   )
