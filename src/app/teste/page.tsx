@@ -1,7 +1,7 @@
-import SindicoPage from "@/components/Sindico/SindicoPage";
+import SelecionarMoradiaPage from "@/components/SelecionarMoradia/SelecionarMoradia";
 
 export default function Teste() {
   return (
-    <SindicoPage/>
+    <SelecionarMoradiaPage/>
   )
 }

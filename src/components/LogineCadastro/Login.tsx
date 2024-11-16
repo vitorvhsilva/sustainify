@@ -39,7 +39,31 @@ export default function Login() {
   }
 
   const loginMorador = async (login: TipoLogin) => {
+    try {
+      const response = await fetch("http://localhost:8080/moradores/login", {
+        method:"POST",
+        headers:{
+          "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(login)
+      });
 
+      if(!response.ok){
+        const erroTexto = await response.text();
+        alert(erroTexto)
+        return
+      }
+
+      const idMorador = await response.json();
+      localStorage.setItem("idMorador", idMorador)
+
+      alert("Login feito com sucesso!")
+      navigate.push("/sindico")
+
+    } catch (error) {
+      alert(error)
+      console.error("Falha ao fazer login!", error);
+    }
   }
 
   const loginSindico = async (login: TipoLogin) => {
