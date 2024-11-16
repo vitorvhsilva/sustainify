@@ -35,6 +35,14 @@ export type TipoSindico = {
   telefoneSindico: string;
 }
 
+export type TipoMorador = {
+  nomeMorador: string;
+  cpfMorador: string;
+  emailMorador: string;
+  senhaMorador: string;
+  telefoneMorador: string;
+}
+
 export type TipoComunidade = {
   ruaComunidade: string,
   numComunidade: string,
