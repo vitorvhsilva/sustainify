@@ -1,7 +1,7 @@
 import { TipoMoradorRanking, TipoPremioRanking } from "@/app/types"
 import LinhaRanking from "../Morador/LinhaRanking";
 import LinhaPremioSindico from "./LinhaPremioSindico";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function RankingComunidadeSindico() {
 
@@ -11,15 +11,24 @@ export default function RankingComunidadeSindico() {
     {nome: "Lucas Bracco Yamamoto", numResidencia: "23T", emissao: 30},
   ]
 
-  const premios: TipoPremioRanking[] = [
-    {posicao: 1, premio: "PS4"},
-    {posicao: 2, premio: "PS5"},
-    {posicao: 3, premio: "PS6"}
-  ]
+  useEffect(() => {
+    pegarPremios()
+  }, [])
+
+  const pegarPremios = async () => {
+    const idSindico = localStorage.getItem("idSindico")
+
+    const premiosResponse = await fetch(`http://localhost:8080/premios/${idSindico}`);
+    const premios: TipoPremioRanking[] = await premiosResponse.json();
+    setPremios(premios)
+  }
 
   const [mostrarEditar, setMostrarEditar] = useState(false)
+  const [premios, setPremios] = useState<TipoPremioRanking[]>([])
+
   const [premioSelecionado, setPremioSelecionado] = useState<TipoPremioRanking>({
-    posicao: 0,
+    idSindico: 0,
+    posicaoPremio: 0,
     premio: ""
   })
 
@@ -65,7 +74,7 @@ export default function RankingComunidadeSindico() {
 
             <tbody>
               {premios.map((p, i) => (
-                <LinhaPremioSindico key={i} posicao={p.posicao} premio={p.premio} onClickEditar={() => onClickPremio(p)}/>
+                <LinhaPremioSindico key={i} idSindico={p.idSindico} posicaoPremio={p.posicaoPremio} premio={p.premio} onClickEditar={() => onClickPremio(p)}/>
               ))}
             </tbody>
 
@@ -76,7 +85,7 @@ export default function RankingComunidadeSindico() {
           <> 
             <h2 className="text-2xl mt-10">Editar Prêmio</h2>
             <form action="">
-              <label htmlFor="" className="block text-xl">Posição: {premioSelecionado.posicao}</label>
+              <label htmlFor="" className="block text-xl">Posição: {premioSelecionado.posicaoPremio}</label>
               <label htmlFor="" className="block text-xl">Prêmio Original: {premioSelecionado.premio}</label>
               <label htmlFor="premio" className="text-xl">Prêmio Atualizado: </label>
               <input type="text" id="premio" name="premio" className="border border-solid border-corPreta rounded-lg p-2"/>

@@ -5,7 +5,8 @@ export type TipoMoradorRanking = {
 }
 
 export type TipoPremioRanking = {
-  posicao: number,
+  idSindico: number,
+  posicaoPremio: number,
   premio: string
 }
 
