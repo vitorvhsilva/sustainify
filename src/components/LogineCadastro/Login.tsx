@@ -58,7 +58,7 @@ export default function Login() {
       localStorage.setItem("idMorador", idMorador)
 
       alert("Login feito com sucesso!")
-      navigate.push("/sindico")
+      navigate.push("/moradias")
 
     } catch (error) {
       alert(error)

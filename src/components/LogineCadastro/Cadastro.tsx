@@ -44,7 +44,7 @@ export default function Cadastro() {
     }
   }
 
-  const cadastroMorador = (cadastro: TipoCadastro) => {
+  const cadastroMorador = async (cadastro: TipoCadastro) => {
     const requisicao = {
       nomeMorador: cadastro.nome,
       cpfMorador: cadastro.cpf,
@@ -54,7 +54,50 @@ export default function Cadastro() {
       cepSolicitacao: cadastro.cep,
       numResidenciaSolicitacao: cadastro.numResidencia
     } 
-    console.log(requisicao)
+    try {
+      const responseMorador = await fetch("http://localhost:8080/moradores", {
+        method:"POST",
+        headers:{
+          "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(requisicao)
+      });
+
+      if(!responseMorador.ok){
+        const erroTexto = await responseMorador.text();
+        alert(erroTexto)
+        return
+      }
+
+      const responseLogin = await fetch("http://localhost:8080/moradores/login", {
+        method:"POST",
+        headers:{
+          "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({email: requisicao.emailMorador, senha: requisicao.senhaMorador})
+      });
+
+      const idMorador = await responseLogin.json()
+      localStorage.setItem("idMorador", idMorador)
+
+      alert("Cadastro feito com sucesso!")
+      setCadastro({
+        nome: "",
+        cep: "",
+        cpf: "",
+        email: "",
+        numEndereco: "",
+        numResidencia: "",
+        rua: "",
+        senha: "",
+        telefone: ""
+      });
+      navigate.push("/moradias")
+
+    } catch (error) {
+      alert(error)
+      console.error("Falha ao cadastrar sindico!", error);
+    }
   }
 
   const cadastroSindico = async (cadastro: TipoCadastro) => {
@@ -70,7 +113,7 @@ export default function Cadastro() {
     } 
 
     try {
-      const response = await fetch("http://localhost:8080/sindicos", {
+      const responseSindico = await fetch("http://localhost:8080/sindicos", {
         method:"POST",
         headers:{
           "Content-Type" : "application/json"
@@ -78,8 +121,8 @@ export default function Cadastro() {
         body: JSON.stringify(requisicao)
       });
 
-      if(!response.ok){
-        const erroTexto = await response.text();
+      if(!responseSindico.ok){
+        const erroTexto = await responseSindico.text();
         alert(erroTexto)
         return
       }
@@ -187,7 +230,7 @@ export default function Cadastro() {
             </>
           )
           }
-          <input type="submit" className="bg-cor1 hover:bg-cor2 duration-500 transition cursor-pointer px-10 py-2 text-corBranca text-2xl rounded-xl block mx-auto xl:mt-14 mt-6"/>
+          <input type="submit" className="bg-cor1 hover:bg-cor2 duration-500 cursor-pointer transition px-10 py-2 text-corBranca text-2xl rounded-xl block mx-auto xl:mt-14 mt-6"/>
         </form>
       </div>
     </section>
