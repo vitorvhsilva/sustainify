@@ -20,3 +20,11 @@ export type TipoCadastro = {
   cep: string,
   numResidencia: string;
 }
+
+export type TipoSindico = {
+  nomeSindico: string;
+  cpfSindico: string;
+  emailSindico: string;
+  senhaSindico: string;
+  telefoneSindico: string;
+}

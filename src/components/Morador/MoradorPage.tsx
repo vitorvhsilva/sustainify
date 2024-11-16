@@ -17,7 +17,7 @@ export default function MoradorPage() {
 
   return (
     <main className="w-full h-fit p-10">
-      <h1 className="text-7xl">Seja bem vindo, <span className="text-cor2">Vitor!</span></h1>
+      <h1 className="md:text-6xl text-4xl">Seja bem vindo, <span className="text-cor2">Vitor!</span></h1>
       <h2 className="text-2xl">Veja sua emissão de carbono ao longo do ano:</h2>
       <GraficoLinha data={data}/>
       <div className="w-full h-[2px] mx-auto rounded-xl bg-corPreta/50"></div>

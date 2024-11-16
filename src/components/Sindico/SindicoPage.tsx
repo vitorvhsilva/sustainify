@@ -1,9 +1,11 @@
 "use client"
 
+import { TipoSindico } from "@/app/types";
 import GraficoLinha from "../Graficos/GraficoLinha";
 import InformacoesPessoaisSindico from "./InformacoesPessoaisSindico";
 import RankingComunidadeSindico from "./RankingComunidadeSindico";
 import SolicitacoesUsuarios from "./SolicitacoesUsuario";
+import { useEffect, useState } from "react";
 
 export default function SindicoPage() {
 
@@ -14,9 +16,29 @@ export default function SindicoPage() {
     { mes: 'Abril', emissao: 25 },
   ];
 
+  useEffect(() => {
+    pegarSindico()
+  }, [])
+
+  const [sindico, setSindico] = useState<TipoSindico>({
+    nomeSindico: "",
+    cpfSindico: "",
+    emailSindico: "",
+    senhaSindico: "",
+    telefoneSindico: ""
+  })
+
+  const pegarSindico = async () => {
+    const idSindico = localStorage.getItem("idSindico")
+
+    const sindicoResponse = await fetch(`http://localhost:8080/sindicos/${idSindico}`);
+    const sindico: TipoSindico = await sindicoResponse.json();
+    setSindico(sindico)
+  }
+
   return (
     <main className="w-full h-fit p-10">
-      <h1 className="text-7xl">Seja bem vindo, <span className="text-cor2">Lucas!</span></h1>
+      <h1 className="md:text-6xl text-4xl">Seja bem vindo, <span className="text-cor2">{sindico.nomeSindico}!</span></h1>
       <h2 className="text-2xl">Veja a emissão de carbono da sua comunidade ao longo do ano:</h2>
       <GraficoLinha data={data}/>  
       <div className="w-full h-[2px] mx-auto rounded-xl bg-corPreta/50"></div>
@@ -30,7 +52,7 @@ export default function SindicoPage() {
           <div className="w-[2px] h-[55rem] mx-auto rounded-xl bg-corPreta/50"></div>
         </div>
         <div className="w-full h-[2px] mx-auto rounded-xl bg-corPreta/50 lg:hidden block my-5"></div>
-        <InformacoesPessoaisSindico />
+        <InformacoesPessoaisSindico nome={sindico.nomeSindico} cpf={sindico.cpfSindico} email={sindico.emailSindico} telefone={sindico.telefoneSindico}/>
       </div>
     </main>
   )
