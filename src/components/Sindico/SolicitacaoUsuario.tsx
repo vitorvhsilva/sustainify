@@ -11,7 +11,7 @@ export default function SolicitacaoUsuario({solicitacao}:{solicitacao: TipoSolic
         headers:{
           "Content-Type" : "application/json"
         },
-        body: JSON.stringify({numResidenciaSolicitacao: solicitacao.numResidenciaSolicitacao})
+        body: JSON.stringify({idSindico: solicitacao.idSindico, idMorador: solicitacao.idMorador, numMoradia: solicitacao.numResidenciaSolicitacao})
       });
 
       if(!response.ok){
