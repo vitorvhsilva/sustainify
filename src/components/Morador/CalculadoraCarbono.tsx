@@ -1,5 +1,6 @@
 "use client"
 
+import { TipoFormulario } from "@/app/types"
 import { useState } from "react"
 
 export default function CalculadoraCarbono () {
@@ -11,11 +12,23 @@ export default function CalculadoraCarbono () {
     emissao: 0,
   })
 
+  const [formulario, setFormulario] = useState<TipoFormulario>({
+    idMoradia: 0,
+    valorContaLuzMensal: 0,
+    energiaGastaMensal: 0,
+    emissaoCarbonoMensal: 0,
+    mesEmitido: 0,
+    anoEmitido: 0
+  })
+
   const [mostrarResultado, setMostrarResultado] = useState(false)
 
   const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(conta)
+    const dataAtual = new Date();
+
+    const mesAtual = dataAtual.getMonth() + 1;
+    const anoAtual = dataAtual.getFullYear();
 
     function calcularConsumo(valorConta: number) {
       const consumoKWh = valorConta / 0.95;
@@ -23,15 +36,62 @@ export default function CalculadoraCarbono () {
       return consumoKWh;
     }
 
-    const consumoKWh = calcularConsumo(conta);
-
     function calcularEmissaoCarbono(consumoKWh: number) {
       return consumoKWh * 0.045; 
     }
 
+    const consumoKWh = calcularConsumo(conta);
     const emissaoCarbono = calcularEmissaoCarbono(consumoKWh);
-    setResultado({valor: conta, consumo: consumoKWh, emissao: emissaoCarbono})
+
+    const consumoKWhLimitado = consumoKWh.toFixed(2);
+    const emissaoCarbonoLimitada = emissaoCarbono.toFixed(2);
+
+    const consumoKWhFinal = parseFloat(consumoKWhLimitado);
+    const emissaoCarbonoFinal = parseFloat(emissaoCarbonoLimitada);
+
+    setResultado({valor: conta, consumo: consumoKWhFinal, emissao: emissaoCarbonoFinal})
     setMostrarResultado(true)
+
+    const idMoradia = localStorage.getItem("idMoradia")
+    
+    if (idMoradia == null) {
+      alert("Erro ao autenticar!")
+      return
+    }
+
+    setFormulario({idMoradia: parseInt(idMoradia), valorContaLuzMensal: conta, energiaGastaMensal: consumoKWhFinal, emissaoCarbonoMensal: emissaoCarbonoFinal, mesEmitido: mesAtual, anoEmitido: anoAtual})
+
+    try {
+      const responseFormulario = await fetch("http://localhost:8080/formularios", {
+        method:"POST",
+        headers:{
+          "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({idMoradia: parseInt(idMoradia), valorContaLuzMensal: conta, energiaGastaMensal: consumoKWhFinal, emissaoCarbonoMensal: emissaoCarbonoFinal, mesEmitido: mesAtual, anoEmitido: anoAtual})
+      });
+
+      if(!responseFormulario.ok){
+        const erroTexto = await responseFormulario.text();
+        alert(erroTexto)
+        return
+      }
+
+      alert("Formulario feito com sucesso!")
+      setFormulario({
+        idMoradia: 0,
+        valorContaLuzMensal: 0,
+        energiaGastaMensal: 0,
+        emissaoCarbonoMensal: 0,
+        mesEmitido: 0,
+        anoEmitido: 0
+      });
+
+      window.location.reload()
+
+    } catch (error) {
+      alert(error)
+      console.error("Falha ao cadastrar formulario!", error);
+    }
   }
 
   return (
@@ -43,7 +103,7 @@ export default function CalculadoraCarbono () {
         <input type="submit" className="mt-2 block bg-cor4 text-corBranca text-2xl px-10 py-2 rounded-xl cursor-pointer"/>
       </form>
       {mostrarResultado && (
-        <div className="w-full h-fit border border-solid border-corPreta rounded-xl mt-5 p-5">
+        <div className="w-full h-fit border border-solid border-corPreta rounded-xl my-5 p-5">
           <h2>valor da conta: {resultado.valor}</h2>
           <h2>consumo de energia aproximado: {resultado.consumo} kWh</h2>
           <h2>emissão de carbono aproximada: {resultado.emissao} kg de CO₂</h2>

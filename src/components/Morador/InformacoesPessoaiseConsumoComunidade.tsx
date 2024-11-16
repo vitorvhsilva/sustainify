@@ -1,20 +1,26 @@
 import { useEffect, useState } from "react";
 import GraficoLinha from "../Graficos/GraficoLinha";
-import { TipoMorador } from "@/app/types";
+import { TipoEmissao, TipoMorador } from "@/app/types";
 
 export default function InformacoesPessoaiseConsumoComunidade() {
 
   useEffect(() => {
     pegarMorador()
+    pegarEmissoesMorador()
   }, [])
 
-  const data = [
-    { mes: 'Janeiro', emissao: 30 },
-    { mes: 'Fevereiro', emissao: 45 },
-    { mes: 'Março', emissao: 20 },
-    { mes: 'Abril', emissao: 25 },
-  ];
+  const pegarEmissoesMorador = async () => {
+    const dataAtual = new Date();
 
+    const anoAtual = dataAtual.getFullYear();
+    const idMoradia = localStorage.getItem("idMoradia")
+
+    const response = await fetch(`http://localhost:8080/formularios/comunidade/${idMoradia}/${anoAtual}`)
+    const emissoes = await response.json()
+    setEmissoes(emissoes)
+  }
+
+  const [emissoes, setEmissoes] = useState<TipoEmissao[]>([])
   const [morador, setMorador] = useState<TipoMorador>({
     nomeMorador: "",
     cpfMorador: "",
@@ -40,7 +46,7 @@ export default function InformacoesPessoaiseConsumoComunidade() {
       <h3 className="md:text-3xl text-xl font-semibold my-2">Telefone: <span className="text-cor1">{morador.telefoneMorador}</span></h3>
       <div className="w-full h-[2px] mx-auto rounded-xl bg-corPreta/50 my-5"></div>
       <h2 className="text-2xl mb-5">consumo da comunidade</h2>
-      <GraficoLinha data={data}/>
+      <GraficoLinha data={emissoes}/>
     </div>
   )
 }

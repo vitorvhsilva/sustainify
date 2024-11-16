@@ -58,3 +58,17 @@ export type TipoSolicitacao = {
   numResidenciaSolicitacao: string
   solicitacaoAceita: number
 }
+
+export type TipoFormulario = {
+  idMoradia: number;
+  valorContaLuzMensal: number;
+  energiaGastaMensal: number;
+  emissaoCarbonoMensal: number;
+  mesEmitido: number;
+  anoEmitido: number;
+}
+
+export type TipoEmissao = {
+  mes: string,
+  emissao: number
+}
