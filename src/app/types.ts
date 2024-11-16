@@ -22,6 +22,11 @@ export type TipoCadastro = {
   numResidencia: string;
 }
 
+export type TipoLogin = {
+  email: string,
+  senha: string,
+}
+
 export type TipoSindico = {
   nomeSindico: string;
   cpfSindico: string;
