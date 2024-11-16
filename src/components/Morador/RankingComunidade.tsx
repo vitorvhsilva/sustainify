@@ -1,8 +1,13 @@
 import { TipoMoradorRanking, TipoPremioRanking } from "@/app/types"
 import LinhaRanking from "./LinhaRanking"
 import LinhaPremio from "./LinhaPremio"
+import { useEffect, useState } from "react"
 
 export default function RankingComunidade() {
+
+  useEffect(() => {
+    pegarPremios()
+  }, [])
 
   const data: TipoMoradorRanking[] = [
     {nome: "Vitor Hugo da Silva", numResidencia: "49A", emissao: 20},
@@ -10,11 +15,15 @@ export default function RankingComunidade() {
     {nome: "Lucas Bracco Yamamoto", numResidencia: "23T", emissao: 30},
   ]
 
-  const premios: TipoPremioRanking[] = [
-    {posicao: 1, premio: "PS4"},
-    {posicao: 2, premio: "PS4"},
-    {posicao: 3, premio: "PS4"}
-  ]
+  const [premios, setPremios] = useState<TipoPremioRanking[]>([])
+
+  const pegarPremios = async () => {
+    const idMoradia = localStorage.getItem("idMoradia")
+
+    const premiosResponse = await fetch(`http://localhost:8080/moradias/premios/${idMoradia}`);
+    const premios: TipoPremioRanking[] = await premiosResponse.json();
+    setPremios(premios)
+  }
 
   const listaPorEmissao = [...data].sort((a, b) => a.emissao - b.emissao);
 
@@ -52,7 +61,7 @@ export default function RankingComunidade() {
 
             <tbody>
               {premios.map((p, i) => (
-                <LinhaPremio key={i} posicao={p.posicao} premio={p.premio}/>
+                <LinhaPremio key={i} idSindico={p.idSindico} posicaoPremio={p.posicaoPremio} premio={p.premio}/>
               ))}
             </tbody>
 
