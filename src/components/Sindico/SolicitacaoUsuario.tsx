@@ -6,12 +6,12 @@ export default function SolicitacaoUsuario({solicitacao}:{solicitacao: TipoSolic
 
   const aceitarSolicitacao = async () => {
     try {
-      const response = await fetch("http://localhost:8080/moradores/status", {
+      const response = await fetch("http://localhost:8080/solicitacoes", {
         method:"PUT",
         headers:{
           "Content-Type" : "application/json"
         },
-        body: JSON.stringify({idMorador: solicitacao.idMorador})
+        body: JSON.stringify({numResidenciaSolicitacao: solicitacao.numResidenciaSolicitacao})
       });
 
       if(!response.ok){

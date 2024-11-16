@@ -48,4 +48,5 @@ export type TipoSolicitacao = {
   cpfMorador: string
   cepSolicitacao: string
   numResidenciaSolicitacao: string
+  solicitacaoAceita: number
 }
