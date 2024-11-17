@@ -6,10 +6,10 @@ export default function InformacoesPessoaiseConsumoComunidade() {
 
   useEffect(() => {
     pegarMorador()
-    pegarEmissoesMorador()
+    pegarEmissoesComunidade()
   }, [])
 
-  const pegarEmissoesMorador = async () => {
+  const pegarEmissoesComunidade = async () => {
     const dataAtual = new Date();
 
     const anoAtual = dataAtual.getFullYear();

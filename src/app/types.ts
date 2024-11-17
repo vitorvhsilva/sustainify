@@ -1,7 +1,12 @@
-export type TipoMoradorRanking = {
-  nome: string,
+export type TipoFormularioRanking = {
+  idMoradia: number,
+  idSindico: number,
+  valorContaLuzMensal: number,
+  energiaGastaMensal: number,
+  emissaoCarbonoMensal: number,
   numResidencia: string,
-  emissao: number
+  mesEmitido: number,
+  anoEmitido: number,
 }
 
 export type TipoPremioRanking = {

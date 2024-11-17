@@ -1,4 +1,4 @@
-import { TipoMoradorRanking, TipoPremioRanking } from "@/app/types"
+import { TipoFormularioRanking, TipoPremioRanking } from "@/app/types"
 import LinhaRanking from "./LinhaRanking"
 import LinhaPremio from "./LinhaPremio"
 import { useEffect, useState } from "react"
@@ -7,14 +7,10 @@ export default function RankingComunidade() {
 
   useEffect(() => {
     pegarPremios()
+    pegarRanking()
   }, [])
 
-  const data: TipoMoradorRanking[] = [
-    {nome: "Vitor Hugo da Silva", numResidencia: "49A", emissao: 20},
-    {nome: "Joao Murilla Gananca", numResidencia: "32D", emissao: 10},
-    {nome: "Lucas Bracco Yamamoto", numResidencia: "23T", emissao: 30},
-  ]
-
+  const [formularios, setFormularios] = useState<TipoFormularioRanking[]>([])
   const [premios, setPremios] = useState<TipoPremioRanking[]>([])
 
   const pegarPremios = async () => {
@@ -25,7 +21,19 @@ export default function RankingComunidade() {
     setPremios(premios)
   }
 
-  const listaPorEmissao = [...data].sort((a, b) => a.emissao - b.emissao);
+  const pegarRanking = async () => {
+    const idMoradia = localStorage.getItem("idMoradia")
+
+    const dataAtual = new Date();
+    const anoAtual = dataAtual.getFullYear();
+    const mesAtual = dataAtual.getMonth() + 1;
+
+    const rankingResponse = await fetch(`http://localhost:8080/formularios/comunidade/morador/${idMoradia}/${mesAtual}/${anoAtual}`);
+    const formularios: TipoFormularioRanking[] = await rankingResponse.json();
+    setFormularios(formularios)
+  }
+
+  const listaPorEmissao = [...formularios].sort((a, b) => a.emissaoCarbonoMensal - b.emissaoCarbonoMensal);
 
   return (
     <div className="lg:w-[49%] w-[90%] h-fit pt-2">
@@ -36,15 +44,14 @@ export default function RankingComunidade() {
           <table className="w-full h-fit border border-solid border-corPreta">
             <thead>
               <tr className="border border-solid border-corPreta">
-                <th className="border border-solid border-corPreta">Nome</th>
                 <th className="border border-solid border-corPreta">Número Residência</th>
                 <th className="border border-solid border-corPreta">Emissão</th>
               </tr>
             </thead>
 
             <tbody>
-              {listaPorEmissao.map((d, i) => (
-                <LinhaRanking key={i} nome={d.nome} emissao={d.emissao} numResidencia={d.numResidencia}/>
+              {listaPorEmissao.map((f, i) => (
+                <LinhaRanking key={i} emissao={f.emissaoCarbonoMensal} numResidencia={f.numResidencia}/>
               ))}
             </tbody>
           </table>
