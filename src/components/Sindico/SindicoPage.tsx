@@ -1,6 +1,6 @@
 "use client"
 
-import { TipoComunidade, TipoSindico } from "@/app/types";
+import { TipoComunidade, TipoEmissao, TipoSindico } from "@/app/types";
 import GraficoLinha from "../Graficos/GraficoLinha";
 import InformacoesPessoaisSindico from "./InformacoesPessoaisSindico";
 import RankingComunidadeSindico from "./RankingComunidadeSindico";
@@ -9,17 +9,12 @@ import { useEffect, useState } from "react";
 
 export default function SindicoPage() {
 
-  const data = [
-    { mes: 'Janeiro', emissao: 30 },
-    { mes: 'Fevereiro', emissao: 45 },
-    { mes: 'Março', emissao: 20 },
-    { mes: 'Abril', emissao: 25 },
-  ];
-
   useEffect(() => {
     pegarSindico()
+    pegarEmissoesComunidade()
   }, [])
 
+  const [emissoes, setEmissoes] = useState<TipoEmissao[]>([])
   const [sindico, setSindico] = useState<TipoSindico>({
     nomeSindico: "",
     cpfSindico: "",
@@ -46,11 +41,23 @@ export default function SindicoPage() {
     setComunidade(comunidade)
   }
 
+  const pegarEmissoesComunidade = async () => {
+    const dataAtual = new Date();
+
+    const anoAtual = dataAtual.getFullYear();
+    const idSindico = localStorage.getItem("idSindico")
+
+    const response = await fetch(`http://localhost:8080/formularios/comunidade/sindico/${idSindico}/${anoAtual}`)
+    const emissoes = await response.json()
+    setEmissoes(emissoes)
+  }
+
+
   return (
     <main className="w-full h-fit p-10">
       <h1 className="md:text-6xl text-4xl">Seja bem vindo, <span className="text-cor2">{sindico.nomeSindico}!</span></h1>
       <h2 className="text-2xl">Veja a emissão de carbono da sua comunidade ao longo do ano:</h2>
-      <GraficoLinha data={data}/>  
+      <GraficoLinha data={emissoes}/>  
       <div className="w-full h-[2px] mx-auto rounded-xl bg-corPreta/50"></div>
       <div className="w-full h-fit flex mt-1 flex-col lg:flex-row lg:items-start items-center">
         <RankingComunidadeSindico />

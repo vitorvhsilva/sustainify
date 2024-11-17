@@ -15,7 +15,7 @@ export default function InformacoesPessoaiseConsumoComunidade() {
     const anoAtual = dataAtual.getFullYear();
     const idMoradia = localStorage.getItem("idMoradia")
 
-    const response = await fetch(`http://localhost:8080/formularios/comunidade/${idMoradia}/${anoAtual}`)
+    const response = await fetch(`http://localhost:8080/formularios/comunidade/morador/${idMoradia}/${anoAtual}`)
     const emissoes = await response.json()
     setEmissoes(emissoes)
   }

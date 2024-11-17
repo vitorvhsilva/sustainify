@@ -1,19 +1,16 @@
-import { TipoMoradorRanking, TipoPremioRanking } from "@/app/types"
+import { TipoFormularioRanking, TipoPremioRanking } from "@/app/types"
 import LinhaRanking from "../Morador/LinhaRanking";
 import LinhaPremioSindico from "./LinhaPremioSindico";
 import { useEffect, useState } from "react";
 
 export default function RankingComunidadeSindico() {
 
-  const data: TipoMoradorRanking[] = [
-    {nome: "Vitor Hugo da Silva", numResidencia: "49A", emissao: 20},
-    {nome: "Joao Murilla Gananca", numResidencia: "32D", emissao: 10},
-    {nome: "Lucas Bracco Yamamoto", numResidencia: "23T", emissao: 30},
-  ]
-
   useEffect(() => {
     pegarPremios()
+    pegarRanking()
   }, [])
+
+  const [formularios, setFormularios] = useState<TipoFormularioRanking[]>([])
 
   const pegarPremios = async () => {
     const idSindico = localStorage.getItem("idSindico")
@@ -21,6 +18,18 @@ export default function RankingComunidadeSindico() {
     const premiosResponse = await fetch(`http://localhost:8080/premios/${idSindico}`);
     const premios: TipoPremioRanking[] = await premiosResponse.json();
     setPremios(premios)
+  }
+
+  const pegarRanking = async () => {
+    const idSindico = localStorage.getItem("idSindico")
+
+    const dataAtual = new Date();
+    const anoAtual = dataAtual.getFullYear();
+    const mesAtual = dataAtual.getMonth() + 1;
+
+    const rankingResponse = await fetch(`http://localhost:8080/formularios/comunidade/sindico/${idSindico}/${mesAtual}/${anoAtual}`);
+    const formularios: TipoFormularioRanking[] = await rankingResponse.json();
+    setFormularios(formularios)
   }
 
   const [mostrarEditar, setMostrarEditar] = useState(false)
@@ -65,7 +74,7 @@ export default function RankingComunidadeSindico() {
     }
   }
 
-  const listaPorEmissao = [...data].sort((a, b) => a.emissao - b.emissao);
+  const listaPorEmissao = [...formularios].sort((a, b) => a.emissaoCarbonoMensal - b.emissaoCarbonoMensal);
 
   return (
     <div className="w-[90%] h-fit pt-2">
@@ -76,7 +85,6 @@ export default function RankingComunidadeSindico() {
           <table className="w-full h-fit border border-solid border-corPreta">
             <thead>
               <tr className="border border-solid border-corPreta">
-                <th className="border border-solid border-corPreta">Nome</th>
                 <th className="border border-solid border-corPreta">Número Residência</th>
                 <th className="border border-solid border-corPreta">Emissão</th>
               </tr>
@@ -84,7 +92,7 @@ export default function RankingComunidadeSindico() {
 
             <tbody>
               {listaPorEmissao.map((d, i) => (
-                <LinhaRanking key={i} nome={d.nome} emissao={d.emissao} numResidencia={d.numResidencia}/>
+                <LinhaRanking key={i} emissao={d.emissaoCarbonoMensal} numResidencia={d.numResidencia}/>
               ))}
             </tbody>
           </table>
