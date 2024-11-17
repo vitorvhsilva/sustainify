@@ -6,7 +6,10 @@ export default function InformacoesPessoaiseConsumoComunidade() {
 
   useEffect(() => {
     pegarMorador()
-    pegarEmissoesComunidade()
+
+    setTimeout(() => {
+      pegarEmissoesComunidade()
+    }, 5000)
   }, [])
 
   const pegarEmissoesComunidade = async () => {

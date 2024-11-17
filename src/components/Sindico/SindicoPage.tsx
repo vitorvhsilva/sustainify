@@ -11,7 +11,10 @@ export default function SindicoPage() {
 
   useEffect(() => {
     pegarSindico()
-    pegarEmissoesComunidade()
+
+    setTimeout(() => {
+      pegarEmissoesComunidade()
+    }, 5000)
   }, [])
 
   const [emissoes, setEmissoes] = useState<TipoEmissao[]>([])

@@ -6,8 +6,10 @@ import { useEffect, useState } from "react"
 export default function RankingComunidade() {
 
   useEffect(() => {
-    pegarPremios()
-    pegarRanking()
+    setTimeout(() => {
+      pegarRanking()
+      pegarPremios()
+    }, 7000)
   }, [])
 
   const [formularios, setFormularios] = useState<TipoFormularioRanking[]>([])

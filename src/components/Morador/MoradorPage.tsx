@@ -11,7 +11,9 @@ import { useEffect, useState } from "react";
 export default function MoradorPage() {
 
   useEffect(() => {
-    pegarEmissoesMorador()
+    setTimeout(() => {
+      pegarEmissoesMorador()
+    }, 2000)
   }, [])
 
   const [emissoes, setEmissoes] = useState<TipoEmissao[]>([])
