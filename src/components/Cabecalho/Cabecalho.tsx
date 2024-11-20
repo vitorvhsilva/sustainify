@@ -1,15 +1,42 @@
 "use client"
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { FaRegUserCircle } from "react-icons/fa";
 
 export default function Cabecalho() {
   const [aberto, setAberto] = useState(false);
+  const [logado, setLogado] = useState(false)
+  const [link, setLink] = useState("")
+
+  useEffect(() => {
+    verificarLogin()
+  }, [])
 
   const toggleMenu = () => {
     setAberto(!aberto);
   };
+
+  const verificarLogin = () => {
+    const idSindico = localStorage.getItem("idSindico")
+    const idMorador = localStorage.getItem("idMorador")
+
+    let logado : boolean = false
+
+    if (idSindico || idMorador) {
+      logado = true
+      setLogado(logado)
+    }
+
+    if (logado) {
+      if (idSindico) {
+        setLink("/sindico")
+      } else {
+        setLink("/morador")
+      }
+    }
+  }
 
   return (
     <header className="navbar">
@@ -35,9 +62,15 @@ export default function Cabecalho() {
           </ul>
         </nav>
       </div>
-      <div className="navbar-login ms-auto">
-        <Link href="/login" className="login-button">Login</Link>
-      </div>
+      { logado ? 
+        <Link href={link}>
+          <FaRegUserCircle className="md:w-12 md:h-12 w-8 h-8 text-cor2 hover:text-cor5 duration-500 transition"/>
+        </Link>
+        :
+        <div className="navbar-login ms-auto">
+          <Link href="/login" className="login-button">Login</Link>
+        </div>
+      }
     </header>
   );
 }
