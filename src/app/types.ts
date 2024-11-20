@@ -85,3 +85,12 @@ export type TipoInformacoesPaginaInicialMorador = {
   formulariosRanking: TipoFormularioRanking[];
   premios: TipoPremioRanking[];
 }
+
+export type TipoInformacoesPaginaInicialSindico = {
+  sindico: TipoSindico;
+  comunidade: TipoComunidade;
+  solicitacoes: TipoSolicitacao[];
+  formulariosMensal: TipoFormularioRanking[];
+  emissoes: TipoEmissao[];
+  premios: TipoPremioRanking[];
+}

@@ -1,39 +1,11 @@
 import { TipoFormularioRanking, TipoPremioRanking } from "@/app/types"
 import LinhaRanking from "../Morador/LinhaRanking";
 import LinhaPremioSindico from "./LinhaPremioSindico";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export default function RankingComunidadeSindico() {
-
-  useEffect(() => {
-    pegarPremios()
-    pegarRanking()
-  }, [])
-
-  const [formularios, setFormularios] = useState<TipoFormularioRanking[]>([])
-
-  const pegarPremios = async () => {
-    const idSindico = localStorage.getItem("idSindico")
-
-    const premiosResponse = await fetch(`http://localhost:8080/premios/${idSindico}`);
-    const premios: TipoPremioRanking[] = await premiosResponse.json();
-    setPremios(premios)
-  }
-
-  const pegarRanking = async () => {
-    const idSindico = localStorage.getItem("idSindico")
-
-    const dataAtual = new Date();
-    const anoAtual = dataAtual.getFullYear();
-    const mesAtual = dataAtual.getMonth() + 1;
-
-    const rankingResponse = await fetch(`http://localhost:8080/formularios/comunidade/sindico/${idSindico}/${mesAtual}/${anoAtual}`);
-    const formularios: TipoFormularioRanking[] = await rankingResponse.json();
-    setFormularios(formularios)
-  }
+export default function RankingComunidadeSindico({premios, formularios}: {premios: TipoPremioRanking[], formularios: TipoFormularioRanking[]}) {
 
   const [mostrarEditar, setMostrarEditar] = useState(false)
-  const [premios, setPremios] = useState<TipoPremioRanking[]>([])
 
   const [premioSelecionado, setPremioSelecionado] = useState<TipoPremioRanking>({
     idSindico: 0,
@@ -125,7 +97,7 @@ export default function RankingComunidadeSindico() {
               <label htmlFor="" className="block text-xl">Prêmio Original: {premioOriginal}</label>
               <label htmlFor="premio" className="text-xl">Prêmio Atualizado: </label>
               <input type="text" id="premio" name="premio" className="border border-solid border-corPreta rounded-lg p-2" onChange={(e)=> setPremioSelecionado({...premioSelecionado, premio:e.target.value})}/>
-              <input type="submit" className="px-10 py-2 bg-cor1 text-xl block text-corBranca mt-5 rounded-xl" />
+              <input type="submit" className="px-10 py-2 bg-cor1 text-xl block text-corBranca mt-5 rounded-xl cursor-pointer hover:bg-cor2 transition duration-500" />
             </form>
           </>
         )
