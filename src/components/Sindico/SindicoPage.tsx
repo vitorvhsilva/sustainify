@@ -6,12 +6,15 @@ import InformacoesPessoaisSindico from "./InformacoesPessoaisSindico";
 import RankingComunidadeSindico from "./RankingComunidadeSindico";
 import SolicitacoesUsuarios from "./SolicitacoesUsuario";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function SindicoPage() {
 
   useEffect(() => {
-    pegarInformacoes()
+    verificarLogin()
   }, [])
+
+  const navigate = useRouter()
 
   const [informacoes, setInformacoes] = useState<TipoInformacoesPaginaInicialSindico>({
     sindico: {nomeSindico: "", cpfSindico: "", emailSindico: "", senhaSindico: "", telefoneSindico: ""},
@@ -21,6 +24,18 @@ export default function SindicoPage() {
     solicitacoes: [],
     premios: []
   })
+
+  const verificarLogin = () => {
+    const idSindico = localStorage.getItem("idSindico")
+
+    if (!idSindico) {
+      alert("Problemas de Autenticação!")
+      navigate.push("/login")
+      return
+    }
+
+    pegarInformacoes()
+  }
 
   const pegarInformacoes = async () => {
     const dataAtual = new Date();

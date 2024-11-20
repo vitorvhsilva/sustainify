@@ -7,11 +7,14 @@ import DicasSustentaveis from "./DicasSustentaveis";
 import InformacoesPessoais from "./InformacoesPessoaiseConsumoComunidade";
 import RankingComunidade from "./RankingComunidade";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function MoradorPage() {
 
+  const navigate = useRouter()
+
   useEffect(() => {
-    pegarInformacoes()
+    verificarLogin()
   }, [])
 
   const [informacoes, setInformacoes] = useState<TipoInformacoesPaginaInicialMorador>({
@@ -21,6 +24,18 @@ export default function MoradorPage() {
     formulariosRanking: [],
     premios: []
   })
+
+  const verificarLogin = () => {
+    const idMorador = localStorage.getItem("idMorador")
+
+    if (!idMorador) {
+      alert("Problemas de Autenticação!")
+      navigate.push("/login")
+      return
+    }
+
+    pegarInformacoes()
+  }
 
   const pegarInformacoes = async () => {
     const dataAtual = new Date();
