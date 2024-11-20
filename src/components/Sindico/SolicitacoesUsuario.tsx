@@ -7,9 +7,9 @@ export default function SolicitacoesUsuario() {
   const [solicitacoes, setSolicitacoes] = useState<TipoSolicitacao[]>([])
 
   useEffect(() => {
-    setTimeout(() => {
-      pegarSolicitacoes()
-    }, 4000)
+    // setTimeout(() => {
+    //   pegarSolicitacoes()
+    // }, 4000)
   }, [])
   
   const pegarSolicitacoes = async () => {

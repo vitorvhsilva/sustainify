@@ -1,39 +1,8 @@
-import { TipoFormularioRanking, TipoPremioRanking } from "@/app/types"
 import LinhaRanking from "./LinhaRanking"
 import LinhaPremio from "./LinhaPremio"
-import { useEffect, useState } from "react"
+import { TipoFormularioRanking, TipoPremioRanking } from "@/app/types";
 
-export default function RankingComunidade() {
-
-  useEffect(() => {
-    setTimeout(() => {
-      pegarRanking()
-      pegarPremios()
-    }, 7000)
-  }, [])
-
-  const [formularios, setFormularios] = useState<TipoFormularioRanking[]>([])
-  const [premios, setPremios] = useState<TipoPremioRanking[]>([])
-
-  const pegarPremios = async () => {
-    const idMoradia = localStorage.getItem("idMoradia")
-
-    const premiosResponse = await fetch(`http://localhost:8080/moradias/premios/${idMoradia}`);
-    const premios: TipoPremioRanking[] = await premiosResponse.json();
-    setPremios(premios)
-  }
-
-  const pegarRanking = async () => {
-    const idMoradia = localStorage.getItem("idMoradia")
-
-    const dataAtual = new Date();
-    const anoAtual = dataAtual.getFullYear();
-    const mesAtual = dataAtual.getMonth() + 1;
-
-    const rankingResponse = await fetch(`http://localhost:8080/formularios/comunidade/morador/${idMoradia}/${mesAtual}/${anoAtual}`);
-    const formularios: TipoFormularioRanking[] = await rankingResponse.json();
-    setFormularios(formularios)
-  }
+export default function RankingComunidade({formularios, premios}:{formularios: TipoFormularioRanking[], premios: TipoPremioRanking[]}) {
 
   const listaPorEmissao = [...formularios].sort((a, b) => a.emissaoCarbonoMensal - b.emissaoCarbonoMensal);
 

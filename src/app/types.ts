@@ -77,3 +77,11 @@ export type TipoEmissao = {
   mes: string,
   emissao: number
 }
+
+export type TipoInformacoesPaginaInicialMorador = {
+  morador: TipoMorador;
+  emissaoMensal: TipoEmissao[];
+  emissaoAnual: TipoEmissao[];
+  formulariosRanking: TipoFormularioRanking[];
+  premios: TipoPremioRanking[];
+}

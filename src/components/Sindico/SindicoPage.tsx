@@ -10,11 +10,11 @@ import { useEffect, useState } from "react";
 export default function SindicoPage() {
 
   useEffect(() => {
-    pegarSindico()
+    // pegarSindico()
 
-    setTimeout(() => {
-      pegarEmissoesComunidade()
-    }, 5000)
+    // setTimeout(() => {
+    //   pegarEmissoesComunidade()
+    // }, 5000)
   }, [])
 
   const [emissoes, setEmissoes] = useState<TipoEmissao[]>([])
