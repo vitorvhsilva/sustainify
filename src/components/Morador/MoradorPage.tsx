@@ -46,7 +46,7 @@ export default function MoradorPage() {
     const idMorador = localStorage.getItem("idMorador")
     const idMoradia = localStorage.getItem("idMoradia")
 
-    const response = await fetch(`http://localhost:8080/paginainicial/morador/${idMorador}/${idMoradia}/${mesAtual}/${anoAtual}`)
+    const response = await fetch(`http://localhost:8080/paginainicial/moradores/${idMorador}/${idMoradia}/${anoAtual}/${mesAtual}/`)
     const informacoesPaginaInicial: TipoInformacoesPaginaInicialMorador = await response.json()
     setInformacoes(informacoesPaginaInicial)
   }

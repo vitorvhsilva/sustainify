@@ -45,7 +45,7 @@ export default function SindicoPage() {
 
     const idSindico = localStorage.getItem("idSindico")
 
-    const response = await fetch(`http://localhost:8080/paginainicial/sindico/${idSindico}/${mesAtual}/${anoAtual}`)
+    const response = await fetch(`http://localhost:8080/paginainicial/sindico/${idSindico}/${anoAtual}/${mesAtual}`)
     const informacoesPaginaInicial: TipoInformacoesPaginaInicialSindico = await response.json()
     console.log(informacoesPaginaInicial)
     setInformacoes(informacoesPaginaInicial)

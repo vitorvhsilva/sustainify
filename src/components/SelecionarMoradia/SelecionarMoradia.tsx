@@ -16,7 +16,7 @@ export default function SelecionarMoradiaPage() {
 
     const idMorador = localStorage.getItem("idMorador")
 
-    const responseSolicitacoes = await fetch(`http://localhost:8080/solicitacoes/morador/${idMorador}`);
+    const responseSolicitacoes = await fetch(`http://localhost:8080/solicitacoes/moradores/${idMorador}`);
     const solicitacoes: TipoSolicitacao[] = await responseSolicitacoes.json();
     setSolicitacoes(solicitacoes)
   }
