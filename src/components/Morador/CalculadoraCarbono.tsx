@@ -1,6 +1,5 @@
 "use client"
 
-import { TipoFormulario } from "@/app/types"
 import { useState } from "react"
 
 export default function CalculadoraCarbono () {
@@ -10,15 +9,6 @@ export default function CalculadoraCarbono () {
     valor: 0,
     consumo: 0,
     emissao: 0,
-  })
-
-  const [formulario, setFormulario] = useState<TipoFormulario>({
-    idMoradia: 0,
-    valorContaLuzMensal: 0,
-    energiaGastaMensal: 0,
-    emissaoCarbonoMensal: 0,
-    mesEmitido: 0,
-    anoEmitido: 0
   })
 
   const [mostrarResultado, setMostrarResultado] = useState(false)
@@ -59,8 +49,6 @@ export default function CalculadoraCarbono () {
       return
     }
 
-    setFormulario({idMoradia: parseInt(idMoradia), valorContaLuzMensal: conta, energiaGastaMensal: consumoKWhFinal, emissaoCarbonoMensal: emissaoCarbonoFinal, mesEmitido: mesAtual, anoEmitido: anoAtual})
-
     try {
       const responseFormulario = await fetch("http://localhost:8080/formularios", {
         method:"POST",
@@ -77,14 +65,6 @@ export default function CalculadoraCarbono () {
       }
 
       alert("Formulario feito com sucesso!")
-      setFormulario({
-        idMoradia: 0,
-        valorContaLuzMensal: 0,
-        energiaGastaMensal: 0,
-        emissaoCarbonoMensal: 0,
-        mesEmitido: 0,
-        anoEmitido: 0
-      });
 
       window.location.reload()
 

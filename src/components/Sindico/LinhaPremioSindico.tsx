@@ -1,7 +1,7 @@
 import { TipoPremioRanking } from "@/app/types";
 import { FaPencilAlt } from "react-icons/fa";
 
-export default function LinhaPremioSindico({idSindico, posicaoPremio, premio, onClickEditar }: TipoPremioRanking & {onClickEditar: () => void}) {
+export default function LinhaPremioSindico({posicaoPremio, premio, onClickEditar }: TipoPremioRanking & {onClickEditar: () => void}) {
   return (
     <tr className="border border-solid border-corPreta">
       <td className="border border-solid border-corPreta">{posicaoPremio}</td>
