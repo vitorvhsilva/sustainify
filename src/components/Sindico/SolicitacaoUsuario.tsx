@@ -30,7 +30,8 @@ export default function SolicitacaoUsuario({solicitacao}:{solicitacao: TipoSolic
 
   const recusarSolicitacao = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/solicitacoes/${solicitacao.idMorador}`);
+      const response = await fetch(`http://localhost:8080/solicitacoes/${solicitacao.idMorador}`, {
+        method:"DELETE"});
 
       if(!response.ok){
         const erroTexto = await response.text();

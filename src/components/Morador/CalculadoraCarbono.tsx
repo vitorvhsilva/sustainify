@@ -50,7 +50,7 @@ export default function CalculadoraCarbono () {
     }
 
     try {
-      const responseFormulario = await fetch("http://localhost:8080/formularios", {
+      const responseFormulario = await fetch("http://localhost:8080/emissoes", {
         method:"POST",
         headers:{
           "Content-Type" : "application/json"
