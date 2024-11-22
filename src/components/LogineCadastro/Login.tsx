@@ -95,7 +95,7 @@ export default function Login() {
   }
 
   return (
-    <section className="w-full h-[92vh] bg-cover bg-[url('/login/fundologin.jpg')] flex items-center">
+    <section className="w-full h-[100vh] bg-cover bg-[url('/login/fundologin.jpg')] flex items-center">
       <div className="xl:w-[40%] lg:w-[60%] md:w-[80%] w-[95%] h-fit bg-cor1 rounded-xl lg:ml-14 mx-auto">
         <Image className="w-48 mx-auto block" src={'/logobranca.png'} alt="Logo da Sustainify" width={1000} height={1000}/>
         <h1 className="text-center text-corBranca text-3xl mb-2">Login</h1>
