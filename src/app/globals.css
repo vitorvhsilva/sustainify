@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components{
+  .spinner{
+      @apply flex justify-center items-center;
+      & div{
+          @apply animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500;
+      }
+  }
+}
+
 .navbar {
   background-color: #f8f9fa;
   padding: 10px;
