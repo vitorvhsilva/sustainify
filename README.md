@@ -8,9 +8,10 @@
 
 * A dependência recharts causa conflito no projeto, então para baixar as dependências é necessário dar **npm i --force**
 
-# Domínio do Projeto
+# Links do Projeto
 
-https://sustainify-tau.vercel.app
+* Domínio: https://sustainify-tau.vercel.app
+* Vídeo Demonstrativo: https://youtu.be/LQbVfO6T9VM
 
 # Objetivos do Projeto
 
